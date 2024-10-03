@@ -1,7 +1,31 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
+auth:
+<AuthorizeView>
+	<Authorized>
+		@foreach (var x in @context.User.Claims)
+		{
+			<div>
+				<style>div label { min-width: 100px; font-weight:bold; }</style>
+				<label>@x.Type:</label> @x.Value
+			</div>
+
+		}
+
+		<h3>
+			@context.User.Claims.FirstOrDefault(x => x.Type == "name")?.Value
+		</h3>
+		<img src="@context.User.Claims.FirstOrDefault(x=>x.Type=="picture")?.Value"/>
+	</Authorized>
+	<NotAuthorized>
+		<p>You're not authorized.</p>
+	</NotAuthorized>
+</AuthorizeView>
+
+
 
 Welcome to your new app. Thats updated2.
