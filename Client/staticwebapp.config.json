@@ -9,6 +9,12 @@
           "appIdSettingName": "FACEBOOK_APP_ID",
           "appSecretSettingName": "FACEBOOK_APP_SECRET_APP_SETTING_NAME"
         }
+      },
+      "google": {
+        "registration": {
+          "clientIdSettingName": "GOOGLE_CLIENT_ID",
+          "clientSecretSettingName": "GOOGLE_CLIENT_SECRET_APP_SETTING_NAME"
+        }
       }
     }
   }
