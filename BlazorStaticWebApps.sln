@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EE32078-E7FA-4918-8B70-5BAF6B4B680A}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\azure-static-web-apps-red-cliff-022be9903.yml = .github\workflows\azure-static-web-apps-red-cliff-022be9903.yml
+		swa-cli.config.json = swa-cli.config.json
 	EndProjectSection
 EndProject
 Global
