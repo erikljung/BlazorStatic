@@ -19,6 +19,8 @@ public class ClientPrincipal
 
 public class HttpTrigger
 {
+	// https://azure.github.io/static-web-apps-cli/docs/cli/local-auth
+
 	public static ClaimsPrincipal Parse(HttpRequestData req)
 	{
 		var principal = new ClientPrincipal();
@@ -66,9 +68,11 @@ public class HttpTrigger
 		var key = "x-ms-client-principal";
 
 		var response = req.CreateResponse(HttpStatusCode.OK);
+		_logger.LogInformation("HIT THAT SHIT");
 		if (req.Headers.TryGetValues(key, out IEnumerable<string> headers))
 		{
 			var header = headers?.FirstOrDefault();
+			_logger.LogInformation($"Got it: {header}");
 			var decoded = Convert.FromBase64String(header);
 			var json = Encoding.UTF8.GetString(decoded);
 			var result = JsonSerializer.Deserialize<ClientPrincipal>(json,
@@ -102,6 +106,20 @@ public class HttpTrigger
 		//	TemperatureC = temp = randomNumber.Next(-20, 55),
 		//	Summary = GetSummary(temp)
 		//}).ToArray();
+
+		var key = "x-ms-client-principal";
+
+		string principal;
+		string authHeader;
+		if (req.Headers.TryGetValues(key, out IEnumerable<string> headers))
+		{
+			principal = headers.FirstOrDefault();
+		}
+
+		if (req.Headers.TryGetValues("Authorization", out var x))
+		{
+			authHeader = x.FirstOrDefault();
+		}
 
 		var result = "ok from public";
 		var response = req.CreateResponse(HttpStatusCode.OK);

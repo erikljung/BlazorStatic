@@ -1,13 +1,15 @@
 ﻿@page "/fetchdata"
 @using BlazorApp.Shared
+@using Microsoft.AspNetCore.Components.Authorization
 @inject HttpClient Http
-
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
+<p>res: @Response</p>
 @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
@@ -39,11 +41,21 @@ else
 
 @code {
     private WeatherForecast[] forecasts = new WeatherForecast[]{};
+    private string Response;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+
+	        var user = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+	        if (user?.User?.Identity?.IsAuthenticated == true)
+	        {
+		        var res = await Http.GetAsync("/api/protected");
+		        Response = await res.Content.ReadAsStringAsync();
+	        }
+
+
             forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/protected") ?? new WeatherForecast[]{};
         }
         catch (Exception ex)

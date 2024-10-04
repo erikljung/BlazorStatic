@@ -2,34 +2,45 @@
   "navigationFallback": {
     "rewrite": "/index.html"
   },
-  "auth": {
-    "identityProviders": {
-      "facebook": {
-        "registration": {
-          "appIdSettingName": "FACEBOOK_APP_ID",
-          "appSecretSettingName": "FACEBOOK_APP_SECRET_APP_SETTING_NAME"
+  "routes": [
+    {
+      "route": "/api/protected",
+      "allowedRoles": [ "authenticated"]
+    },
+    {
+      "route": "/api/public",
+      "allowedRoles": [ "authenticated", "anonymous" ]
+    }
+  ],
+    "auth":
+    {
+      "identityProviders": {
+        "facebook": {
+          "registration": {
+            "appIdSettingName": "FACEBOOK_APP_ID",
+            "appSecretSettingName": "FACEBOOK_APP_SECRET_APP_SETTING_NAME"
+          },
+          "login": {
+            "scopes": [
+              "public_profile",
+              "email",
+              "openid"
+            ]
+          }
         },
-        "login": {
-          "scopes": [
-            "public_profile",
-            "email",
-            "openid"
-          ]
-        }
-      },
-      "google": {
-        "login": {
-          "scopes": [
-            "email",
-            "openid",
-            "profile"
-          ]
-        },
-        "registration": {
-          "clientIdSettingName": "GOOGLE_CLIENT_ID",
-          "clientSecretSettingName": "GOOGLE_CLIENT_SECRET_APP_SETTING_NAME"
+        "google": {
+          "login": {
+            "scopes": [
+              "email",
+              "openid",
+              "profile"
+            ]
+          },
+          "registration": {
+            "clientIdSettingName": "GOOGLE_CLIENT_ID",
+            "clientSecretSettingName": "GOOGLE_CLIENT_SECRET_APP_SETTING_NAME"
+          }
         }
       }
     }
-  }
 }
