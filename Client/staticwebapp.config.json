@@ -21,7 +21,8 @@
         "login": {
           "scopes": [
             "email",
-            "openid"
+            "openid",
+            "profile"
           ]
         },
         "registration": {
