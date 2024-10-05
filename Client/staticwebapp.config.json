@@ -5,11 +5,15 @@
   "routes": [
     {
       "route": "/api/protected",
-      "allowedRoles": [ "authenticated"]
+      "allowedRoles": [ "authenticated" ]
     },
     {
       "route": "/api/public",
       "allowedRoles": [ "authenticated", "anonymous" ]
+    },
+    {
+      "route": "/counter",
+      "allowedRoles": [ "authenticated" ]
     }
   ],
     "auth":
