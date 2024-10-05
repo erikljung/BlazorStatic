@@ -54,9 +54,13 @@ else
 		        var res = await Http.GetAsync("/api/protected");
 		        Response = await res.Content.ReadAsStringAsync();
 	        }
-
+	        else
+	        {
 
             forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/protected") ?? new WeatherForecast[]{};
+	        }
+
+
         }
         catch (Exception ex)
         {
